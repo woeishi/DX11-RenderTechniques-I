@@ -1,0 +1,120 @@
+struct vs2ps { float4 PosWVP: SV_POSITION; float2 uv: TEXCOORD0; };
+SamplerState PointSampler: IMMUTABLE {AddressU=Wrap;};
+
+// no pin is created due to semantics. automagically fetches 1/texture size
+float2 pixelsize: INVTARGETSIZE;
+
+// texture is result from previous pass or if none available of the input pin
+Texture2D InputTexture: PREVIOUS;
+
+// texture is always the one on the input pin regardless of the pass
+Texture2D InputTexture2: INITIAL;
+
+// weights for converting to greyscale
+float3 coefficients = { 0.3, 0.59, 0.11 };
+
+//field to blend between texture 1 and texture 2
+float mixVal;
+
+// threshold for edge detection
+float threshold;
+
+// fields for circle drawing
+float2 center = {0.5, 0.5};
+float2 radius = {0.5, 0.0};
+
+// draw a circle ---------------------------------------------------------------
+float4 Circle(vs2ps vertexData): SV_Target
+{
+	// no need to use the input texture, just use the texture coordinates
+	float2 uv = vertexData.uv;
+	// for each pixel calculate the distance to the specified center
+	float d = distance(uv, center );
+	// draw 0 or 1 depending on the radius
+	return d<radius.x && d>radius.y;
+}
+
+// simple edge detection -------------------------------------------------------
+float4 Edge(vs2ps vertexData): SV_Target
+{
+	float4 org = InputTexture.Sample(PointSampler, vertexData.uv);
+		
+    //lookup the texture shifted by one pixel vertically and horizontally
+	float4 shifted = InputTexture.Sample(PointSampler, vertexData.uv + pixelsize);
+	
+	// absolute difference of all the 3 color channels compared to the shifted texture
+	float diff = dot(abs(org - shifted), 1);
+	if (diff > threshold)
+		return 1;
+	else
+		return float4(0,0,0,1);
+}
+
+// blend textures along the mix factor -----------------------------------------
+float4 Mix(vs2ps vertexData): SV_Target
+{
+	float4 col1 = InputTexture.Sample(PointSampler, vertexData.uv);
+	float4 col2 = InputTexture2.Sample(PointSampler, vertexData.uv);
+	// lerp = linear interpolation
+	// crossfade bewteen color 1 and color 2
+	return lerp(col1, col2, mixVal);
+}
+
+// convert color to greyscale: average weight of the 3 color channels ----------
+// could be done with one operation -> dot product -----------------------------
+float4 Greyscale(vs2ps vertexData): SV_Target
+{
+	float4 col = InputTexture.Sample(PointSampler, vertexData.uv);
+	//multiply with weight factor
+	col.rgb = col.rgb * coefficients; 
+	// sum up the weighted values
+	// so each channel (rgb) has the same value = grey
+	col.rgb = col.r + col.g + col.b; 
+	return col;
+}
+
+// invert color: 1-rgb ---------------------------------------------------------
+float4 Invert(vs2ps vertexData): SV_Target
+{
+	float4 col = InputTexture.Sample(PointSampler, vertexData.uv);
+	col.rgb = 1 - col.rgb;
+	return col;
+}
+
+technique10 TMultiPass 
+{
+	pass P0 
+	{ SetPixelShader(CompileShader(ps_4_0, Invert())); }
+	pass P1 
+	{ SetPixelShader(CompileShader(ps_4_0, Greyscale())); }
+	pass P3 
+	{ SetPixelShader(CompileShader(ps_4_0, Mix())); }
+}
+
+technique10 TInvert 
+{
+	pass P0
+	{ SetPixelShader(CompileShader(ps_4_0, Invert())); }
+}
+technique10 TGreyscale 
+{
+	pass P0
+	{ SetPixelShader(CompileShader(ps_4_0, Greyscale())); }
+}
+technique10 TMix 
+{
+	pass P0
+	{ SetPixelShader(CompileShader(ps_4_0, Mix())); }
+}
+
+technique10 TEdgeDetection 
+{
+	pass P0 
+	{ SetPixelShader(CompileShader(ps_4_0, Edge())); }
+}
+
+technique10 TCircle 
+{
+	pass P0 
+	{ SetPixelShader(CompileShader(ps_4_0, Circle())); }
+}

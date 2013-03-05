@@ -1,0 +1,195 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45alpha29.3.dtd" >
+   <PATCH nodename="D:\__wrkn\_node13\dx11 II publish\07_Geometry_Primitive.v4p" systemname="0_Intro" filename="D:\__wrkn\_node13\dx11 II\0_Intro.v4p">
+   <BOUNDS type="Window" left="12660" top="4215" width="9000" height="6945">
+   </BOUNDS>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="0" systemname="IOBox (String)">
+   <BOUNDS type="Node" left="15" top="15" width="1365" height="270">
+   </BOUNDS>
+   <BOUNDS type="Box" left="15" top="15" width="8790" height="720">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="0" slicecount="1" values="|Geometry, primitive...|">
+   </PIN>
+   <PIN pinname="Output String" visible="0">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="String Type" slicecount="1" values="MultiLine">
+   </PIN>
+   <PIN pinname="Size" slicecount="1" values="24">
+   </PIN>
+   </NODE>
+   <NODE systemname="Renderer (DX11)" filename="%VVVV%\directx11\plugins\VVVV.DX11.Nodes.dll" nodename="Renderer (DX11)" componentmode="InAWindow" id="9">
+   <BOUNDS type="Node" left="195" top="6075" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="195" top="6075" width="3855" height="3315">
+   </BOUNDS>
+   <BOUNDS type="Window" left="10470" top="10725" width="6120" height="4860">
+   </BOUNDS>
+   <PIN pinname="Show Cursor" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="AA Quality" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Layers" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="View" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Projection" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Depth Buffer Mode" slicecount="1" values="Standard">
+   </PIN>
+   <PIN pinname="Depth Buffer Format" slicecount="1" values="D32_Float">
+   </PIN>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   <PIN pinname="Depth Buffer" visible="1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="10" systemname="IOBox (String)">
+   <BOUNDS type="Node" left="2835" top="1050" width="1365" height="270">
+   </BOUNDS>
+   <BOUNDS type="Box" left="2835" top="1050" width="5505" height="3495">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="0" slicecount="1" values="|Quad = Grid without resolution pins&cr;&lf;&cr;&lf;&cr;&lf;&cr;&lf;&lt;- nice one here&cr;&lf;&cr;&lf;mesh loading: assimp now&cr;&lf;&cr;&lf;spreading: not subsets anymore&cr;&lf;&cr;&lf;cheap bounding box|">
+   </PIN>
+   <PIN pinname="Output String" visible="0">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="String Type" slicecount="1" values="MultiLine">
+   </PIN>
+   <PIN pinname="Size" slicecount="1" values="12">
+   </PIN>
+   </NODE>
+   <NODE systemname="Camera (Transform Softimage)" filename="%VVVV%\lib\nodes\modules\Transform\Camera (Transform Softimage).v4p" nodename="Camera (Transform Softimage)" componentmode="Hidden" id="47">
+   <BOUNDS type="Node" left="1455" top="5715" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="View" visible="1">
+   </PIN>
+   <PIN pinname="Projection" visible="1">
+   </PIN>
+   <PIN pinname="Inital Distance" slicecount="1" values="4.43">
+   </PIN>
+   <PIN pinname="Initial Pitch" slicecount="1" values="0.13">
+   </PIN>
+   <PIN pinname="Initial Yaw" slicecount="1" values="0.14">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="47" srcpinname="View" dstnodeid="9" dstpinname="View">
+   </LINK>
+   <LINK srcnodeid="47" srcpinname="Projection" dstnodeid="9" dstpinname="Projection">
+   </LINK>
+   <NODE systemname="PhongDirectional (DX11.Effect)" filename="%VVVV%\directx11\dx11\PhongDirectional.fx" nodename="PhongDirectional (DX11.Effect)" componentmode="Hidden" id="13">
+   <BOUNDS type="Node" left="195" top="5265" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Layer" visible="1">
+   </PIN>
+   <PIN pinname="Geometry" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Enabled" slicecount="1" values="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="13" srcpinname="Layer" dstnodeid="9" dstpinname="Layers">
+   </LINK>
+   <NODE systemname="Quad (DX11.Geometry)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="Quad (DX11.Geometry)" componentmode="Hidden" id="51">
+   <BOUNDS type="Node" left="360" top="1065" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="360" top="1065">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="Grid (DX11.Geometry)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="Grid (DX11.Geometry)" componentmode="Hidden" id="52">
+   <BOUNDS type="Node" left="360" top="1695" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="360" top="1695">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="Polygon (DX11.Geometry 2d)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="Polygon (DX11.Geometry 2d)" componentmode="Hidden" id="53">
+   <BOUNDS type="Node" left="360" top="2235" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="360" top="2235">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="RoundRect (DX11.Geometry)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="RoundRect (DX11.Geometry)" componentmode="Hidden" id="54">
+   <BOUNDS type="Node" left="1485" top="1065" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1485" top="1065">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="BezierPatch (DX11.Geometry 2d)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="BezierPatch (DX11.Geometry 2d)" componentmode="Hidden" id="55">
+   <BOUNDS type="Node" left="1485" top="2265" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1485" top="2265">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="Box (DX11.Geometry)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="Box (DX11.Geometry)" componentmode="Hidden" id="56">
+   <BOUNDS type="Node" left="360" top="3075" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="360" top="3075">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="Sphere (DX11.Geometry)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="Sphere (DX11.Geometry)" componentmode="Hidden" id="57">
+   <BOUNDS type="Node" left="1635" top="3060" width="100" height="100">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="Segment (DX11.Geometry)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="Segment (DX11.Geometry)" componentmode="Hidden" id="58">
+   <BOUNDS type="Node" left="1485" top="1650" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1485" top="1650">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="Cylinder (DX11.Geometry)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="Cylinder (DX11.Geometry)" componentmode="Hidden" id="59">
+   <BOUNDS type="Node" left="360" top="3600" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="360" top="3600">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="Torus (DX11.Geometry)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="Torus (DX11.Geometry)" componentmode="Hidden" id="60">
+   <BOUNDS type="Node" left="1785" top="3600" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Geometry Out" visible="1">
+   </PIN>
+   </NODE>
+   <NODE systemname="Isocahedron (DX11.Geometry)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="Isocahedron (DX11.Geometry)" componentmode="Hidden" id="61">
+   <BOUNDS type="Node" left="1485" top="4260" width="100" height="100">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="Cons (DX11.Geometry)" filename="%VVVV%\directx11\plugins\VVVV.DX11.Nodes.dll" nodename="Cons (DX11.Geometry)" componentmode="Hidden" id="62">
+   <BOUNDS type="Node" left="5385" top="4935" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="5385" top="4935">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="Mesh (DX11.Geometry Assimp)" filename="%VVVV%\directx11\plugins\VVVV.DX11.Assimp.Nodes.dll" nodename="Mesh (DX11.Geometry Assimp)" componentmode="Hidden" id="63">
+   <BOUNDS type="Node" left="3150" top="4935" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="3150" top="4935">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="BoundingBox (DX11.Geometry Get)" filename="%VVVV%\directx11\plugins\VVVV.DX11.Nodes.dll" nodename="BoundingBox (DX11.Geometry Get)" componentmode="Hidden" id="64">
+   <BOUNDS type="Node" left="6855" top="4935" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Geometry In" visible="1" slicecount="1" values="||">
+   </PIN>
+   <BOUNDS type="Box" left="6855" top="4935">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="BezierPatch (DX11.Geometry 3d)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="BezierPatch (DX11.Geometry 3d)" componentmode="Hidden" id="66">
+   <BOUNDS type="Node" left="360" top="4245" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="360" top="4245">
+   </BOUNDS>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="67" systemname="IOBox (String)">
+   <BOUNDS type="Node" left="6900" top="6195" width="1635" height="270">
+   </BOUNDS>
+   <BOUNDS type="Box" left="6900" top="6195" width="1830" height="255">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="0" slicecount="1" values="|gregsn &amp; woei, #node13|">
+   </PIN>
+   <PIN pinname="Output String" visible="0">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="String Type" slicecount="1" values="MultiLine">
+   </PIN>
+   </NODE>
+   </PATCH>

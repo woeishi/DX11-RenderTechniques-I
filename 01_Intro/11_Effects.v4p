@@ -1,0 +1,109 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45alpha29.3.dtd" >
+   <PATCH nodename="D:\__wrkn\_node13\dx11 II publish\11_Effects.v4p" systemname="0_Intro" filename="D:\__wrkn\_node13\dx11 II\0_Intro.v4p">
+   <BOUNDS type="Window" left="12660" top="4215" width="9000" height="5745">
+   </BOUNDS>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="0" systemname="IOBox (String)">
+   <BOUNDS type="Node" left="15" top="15" width="1365" height="270">
+   </BOUNDS>
+   <BOUNDS type="Box" left="15" top="15" width="8790" height="720">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="0" slicecount="1" values="Effffects">
+   </PIN>
+   <PIN pinname="Output String" visible="0">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="String Type" slicecount="1" values="MultiLine">
+   </PIN>
+   <PIN pinname="Size" slicecount="1" values="24">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="10" systemname="IOBox (String)">
+   <BOUNDS type="Node" left="3285" top="1050" width="1365" height="270">
+   </BOUNDS>
+   <BOUNDS type="Box" left="3285" top="1050" width="4860" height="1605">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="0" slicecount="1" values="|it&apos;s all about the code&cr;&lf;&cr;&lf;still DX11.Effects looks a little empty&cr;&lf;&cr;&lf;fx, fxh, tfx, gsfx,...|">
+   </PIN>
+   <PIN pinname="Output String" visible="0">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="String Type" slicecount="1" values="MultiLine">
+   </PIN>
+   <PIN pinname="Size" slicecount="1" values="12">
+   </PIN>
+   </NODE>
+   <NODE systemname="Constant (DX11.Effect)" filename="%VVVV%\directx11\dx11\Constant.fx" nodename="Constant (DX11.Effect)" componentmode="Hidden" id="105">
+   <BOUNDS type="Node" left="270" top="1305" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="270" top="1305">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="GouraudDirectional (DX11.Effect)" filename="%VVVV%\directx11\dx11\GouraudDirectional.fx" nodename="GouraudDirectional (DX11.Effect)" componentmode="Hidden" id="106">
+   <BOUNDS type="Node" left="270" top="2055" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="270" top="2055">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="PhongDirectional (DX11.Effect)" filename="%VVVV%\directx11\dx11\PhongDirectional.fx" nodename="PhongDirectional (DX11.Effect)" componentmode="Hidden" id="107">
+   <BOUNDS type="Node" left="270" top="2865" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="270" top="2865">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="GouraudPoint (DX11.Effect)" filename="%VVVV%\directx11\dx11\GouraudPoint.fx" nodename="GouraudPoint (DX11.Effect)" componentmode="Hidden" id="108">
+   <BOUNDS type="Node" left="270" top="3645" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="270" top="3645">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="PhongPoint (DX11.Effect)" filename="%VVVV%\directx11\dx11\PhongPoint.fx" nodename="PhongPoint (DX11.Effect)" componentmode="Hidden" id="109">
+   <BOUNDS type="Node" left="270" top="4305" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="270" top="4305">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="Template (DX11.Effect)" filename="%VVVV%\directx11\dx11\Template.fx" nodename="Template (DX11.Effect)" componentmode="Hidden" id="111">
+   <BOUNDS type="Node" left="3915" top="3615" width="100" height="100">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="Template (DX11.TextureFX)" filename="%VVVV%\directx11\texture11\Template.tfx" nodename="Template (DX11.TextureFX)" componentmode="Hidden" id="112">
+   <BOUNDS type="Node" left="6165" top="3615" width="100" height="100">
+   </BOUNDS>
+   </NODE>
+   <NODE nodename="IOBox (Node)" componentmode="InABox" id="113" systemname="IOBox (Node)">
+   <BOUNDS type="Node" left="6180" top="4125" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="6180" top="4125" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Texture Out|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="112" srcpinname="Texture Out" dstnodeid="113" dstpinname="Input Node">
+   </LINK>
+   <NODE nodename="IOBox (Node)" componentmode="InABox" id="114" systemname="IOBox (Node)">
+   <BOUNDS type="Node" left="3915" top="4035" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="3915" top="4035" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Layer">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="111" srcpinname="Layer" dstnodeid="114" dstpinname="Input Node">
+   </LINK>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="115" systemname="IOBox (String)">
+   <BOUNDS type="Node" left="6930" top="5055" width="1635" height="270">
+   </BOUNDS>
+   <BOUNDS type="Box" left="6930" top="5055" width="1830" height="255">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="0" slicecount="1" values="|gregsn &amp; woei, #node13|">
+   </PIN>
+   <PIN pinname="Output String" visible="0">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="String Type" slicecount="1" values="MultiLine">
+   </PIN>
+   </NODE>
+   </PATCH>
