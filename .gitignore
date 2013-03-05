@@ -1,0 +1,7 @@
+*~.xml
+*.csproj.user
+obj/
+bin/
+*.sln
+*.suo
+*.log
